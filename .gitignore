@@ -1,0 +1,29 @@
+
+Click on `.gitignore` and paste this:
+```
+# Expense data (don't commit personal expenses)
+expenses.json
+*.backup_*
+expenses_export_*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
