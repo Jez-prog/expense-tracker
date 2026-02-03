@@ -73,3 +73,17 @@ def save_expenses(expenses):
          
 
         return True
+    
+    except IOError as e:
+        print_error(f'Failes to save: {e}')
+
+        if os.path.exists(temp_file):
+            try:
+                os.remove(temp_file)
+            except:
+                pass
+        return False
+    
+    except Exception as e:
+        print_error(f'unexpected saving error: {e}')
+        return False
