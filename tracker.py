@@ -87,3 +87,29 @@ def save_expenses(expenses):
     except Exception as e:
         print_error(f'unexpected saving error: {e}')
         return False
+    
+
+def get_valid_ammount():
+    while True:
+        try:
+            ammount_str = input('Enter ammount: ')
+
+            if not ammount_str.strip():
+                print_error("Ammount cannot be empty")
+                continue
+
+            ammount = float(ammount_str)
+
+            if ammount <= 0:
+                print_error("Ammount must not be 0 > x.")
+                continue
+
+            return round(ammount, 2)
+        
+        except ValueError:
+            print_error ('Invalid ammount! Must be a number. (e.g. 67,067.67)')
+
+
+
+
+
