@@ -145,3 +145,19 @@ def get_valid_category():
         
         print_error (f"You must choose from these {' ,'.join(CATEGORIES)} only.")
 
+
+def get_description():
+    description = input("write a description about it: (Optional)")
+    if not description:
+        print_info ("No description.")
+    return description
+
+
+
+
+
+
+
+
+
+
