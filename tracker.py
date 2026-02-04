@@ -60,6 +60,15 @@ def load_expenses():
         print_error(f'An unexpected error occurred: {e}')
         return []
     
+
+
+
+
+
+
+
+
+
 def save_expenses(expenses):
     try: 
         temp_file = f'{EXPENSE_FILE}.tmp'
@@ -89,6 +98,15 @@ def save_expenses(expenses):
         return False
     
 
+
+
+
+
+
+
+
+
+
 def get_valid_ammount():
     while True:
         try:
@@ -112,4 +130,18 @@ def get_valid_ammount():
 
 
 
+def get_valid_category():
+    print(f"\nCategories: {' ,'.join(CATEGORIES)}")
+
+    while True:
+        category = input('Input Category: ').strip().lower()
+
+        if not category:
+            print_error ('Category cannot be empty')
+            continue
+
+        if category in CATEGORIES:
+            return category
+        
+        print_error (f"You must choose from these {' ,'.join(CATEGORIES)} only.")
 
