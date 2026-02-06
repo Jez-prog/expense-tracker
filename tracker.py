@@ -155,9 +155,50 @@ def get_description():
 
 
 
+def getValidMaxIndex(max_index):
+    while True:
+        try:
+            index_str = input(f"Enter exepense number 1-{max_index}")
+
+            if not index_str.strip():
+                print_error ("Must enter a number")
+
+            index = int(index_str)
+
+            if 1 <= index <= max_index:
+                return index -1
+            
+            print_error(f"Number must be within 1-{max_index}")
+
+        except ValueError:
+            print_error("Ivalid input. Please input correct value.")
 
 
+def add_expenses(expenses):
+    print(f"\n{Colors.BLUE}{"="*50}{Colors.END}")
+    print(f"{Colors.BLUE}ADD NEW EXPENSES{Colors.END}")
+    print(f"{Colors.BLUE}{"="}{Colors.END}")
 
+    ammount = get_valid_ammount()
+    category = get_valid_category()
+    description = get_valid_ammount()
 
+    expense = {
+        "id": len(expenses) + 1,
+        "ammount": ammount,
+        "category": category,
+        "description": description,
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
 
+    expenses.append(expense)
+
+    if save_expenses(expense):
+        print_success(f"Expense added: ${ammount} for {category}. Saved succesfully!")
+
+    else:
+        expenses.pop()
+        print_error("Something went wrong!")
+
+        
 
