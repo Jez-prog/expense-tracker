@@ -67,8 +67,6 @@ def load_expenses():
 
 
 
-
-
 def save_expenses(expenses):
     try: 
         temp_file = f'{EXPENSE_FILE}.tmp'
@@ -200,5 +198,23 @@ def add_expenses(expenses):
         expenses.pop()
         print_error("Something went wrong!")
 
-        
 
+def view_all_expenses(expenses):
+    """View all expenses"""
+    if not expenses:
+        print_warning("No expenses recorded yet!")
+        return
+    
+    print(f"\n{Colors.BLUE}{'='*80}{Colors.END}")
+    print(f"{Colors.BLUE}ALL EXPENSES{Colors.END}")
+    print(f"{Colors.BLUE}{'='*80}{Colors.END}\n")
+    
+    total = sum(exp['amount'] for exp in expenses)
+    
+    for i, exp in enumerate(expenses, 1):
+        print(f"{i}. [{exp['category'].upper()}] ₱{exp['amount']:.2f} - {exp['description']}")
+        print(f"   Date: {exp['date']}\n")
+    
+    print(f"{Colors.GREEN}{'='*80}{Colors.END}")
+    print(f"{Colors.GREEN}TOTAL: ₱{total:.2f}{Colors.END}")
+    print(f"{Colors.GREEN}{'='*80}{Colors.END}\n")
