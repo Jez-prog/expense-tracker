@@ -199,22 +199,62 @@ def add_expenses(expenses):
         print_error("Something went wrong!")
 
 
+
+
+
+
+
 def view_all_expenses(expenses):
-    """View all expenses"""
     if not expenses:
-        print_warning("No expenses recorded yet!")
+        print_info("No expenses recorded yet!")
         return
     
+
     print(f"\n{Colors.BLUE}{'='*80}{Colors.END}")
     print(f"{Colors.BLUE}ALL EXPENSES{Colors.END}")
-    print(f"{Colors.BLUE}{'='*80}{Colors.END}\n")
-    
-    total = sum(exp['amount'] for exp in expenses)
-    
+    print(f"\n{Colors.BLUE}{'='*80}{Colors.END}")
+
+    total = sum(exp['ammount'] for exp in expenses)
+
     for i, exp in enumerate(expenses, 1):
-        print(f"{i}. [{exp['category'].upper()}] ₱{exp['amount']:.2f} - {exp['description']}")
-        print(f"   Date: {exp['date']}\n")
+        print(f"[{exp['category'].upper()}] ${exp['ammount']:.2f} - {exp['description']}") 
+        print(f"       Date: {exp['date']}\n")
+
+    print(f"{Colors.BLUE}{'='*80}{Colors.END}")
+    print(f"{Colors.GREEN}TOTAL: ${total:.2f}{Colors.END}")
+    print(f"{Colors.BLUE}{'='*80}{Colors.END}")
+
+
+
+def view_by_category(expenses):
+    if not expenses:
+        print_info("No category recorded yet!")
+        return
     
-    print(f"{Colors.GREEN}{'='*80}{Colors.END}")
-    print(f"{Colors.GREEN}TOTAL: ₱{total:.2f}{Colors.END}")
-    print(f"{Colors.GREEN}{'='*80}{Colors.END}\n")
+    print(f"{Colors.BLUE}{'='*50}{Colors.END}")
+    print(f"{Colors.GREEN}EXPENSES BY CATEGORY{Colors.END}")
+    print(f"{Colors.BLUE}{'='*50}{Colors.END}")
+    
+    by_category = {}
+    if exp in expenses:
+        cat = exp['category']
+        if cat not in by_category:
+            by_category[cat] = []
+        by_category[cat].append(exp)
+
+        grand_total = 0
+        for category in sorted(by_category.keys()):
+            cat_expenses = by_category[category]
+            cat_total = sum(exp['amount'] for exp in cat_expenses)
+            grand_total += cat_total
+        
+            print(f"{Colors.YELLOW}{category.upper()}{Colors.END}")
+            print(f"  Count: {len(cat_expenses)}")
+            print(f"  Total: ₱{cat_total:.2f}")
+        
+            for exp in cat_expenses:
+                print(f"    - ₱{exp['amount']:.2f}: {exp['description']}")
+            print()
+    
+        print(f"{Colors.GREEN}GRAND TOTAL: ₱{grand_total:.2f}{Colors.END}\n")
+
